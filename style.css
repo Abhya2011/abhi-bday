@@ -1,0 +1,495 @@
+@font-face {
+  font-family: "Baskerville Old Face";
+  src: local("Baskerville Old Face"), local("Baskerville");
+}
+
+:root {
+  --pink: #F7B2F0;
+  --blue: #B2CEF7;
+  --deep-blue: #536D9E;
+  --ink: #453B46;
+  --cream: #FFF8F4;
+  --soft-pink: #F6DDEB;
+  --window-pink: #EBC5D3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Baskerville Old Face", Baskerville, Georgia, serif;
+  cursor: default;
+}
+
+/* ---------------- PASSWORD SCREEN ---------------- */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+}
+
+.screen.active {
+  display: flex;
+}
+
+#password-screen {
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(247,178,240,.75), transparent 30%),
+    radial-gradient(circle at 82% 75%, rgba(178,206,247,.85), transparent 34%),
+    linear-gradient(135deg, #ead7e5 0%, #f6ddd9 47%, #d5e2f5 100%);
+}
+
+#password-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .22;
+  background-image:
+    radial-gradient(circle, #ffffff 0 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.password-card {
+  position: relative;
+  width: min(520px, calc(100vw - 40px));
+  padding: 58px 52px 50px;
+  text-align: center;
+  background: rgba(255, 248, 244, .88);
+  border: 1px solid rgba(75, 61, 74, .25);
+  box-shadow: 9px 10px 0 rgba(75, 61, 74, .12);
+  animation: appear .6s ease both;
+}
+
+.tiny-star {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+.password-card h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: normal;
+  line-height: 1.05;
+}
+
+.password-subtitle {
+  margin: 18px 0 34px;
+  font-size: 18px;
+}
+
+.password-card label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 17px;
+}
+
+#password-input {
+  width: min(330px, 100%);
+  padding: 13px 16px;
+  border: 1px solid #9d8795;
+  outline: none;
+  background: #fffdfb;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 17px;
+  text-align: center;
+}
+
+#password-input:focus {
+  border-color: var(--deep-blue);
+  box-shadow: 0 0 0 3px rgba(178,206,247,.45);
+}
+
+#unlock-button {
+  display: block;
+  margin: 18px auto 0;
+  padding: 11px 35px;
+  border: 1px solid #9d8795;
+  background: var(--pink);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(69,59,70,.18);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+#unlock-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 rgba(69,59,70,.18);
+}
+
+#unlock-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(69,59,70,.18);
+}
+
+.error-message {
+  min-height: 20px;
+  margin: 13px 0 0;
+  font-size: 15px;
+}
+
+/* ---------------- DESKTOP ---------------- */
+
+.desktop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 70% 25%, rgba(247,178,240,.34), transparent 28%),
+    radial-gradient(ellipse at 28% 72%, rgba(178,206,247,.36), transparent 30%),
+    linear-gradient(135deg, #e7d5e2, #efdcd8 46%, #d7e2f0);
+}
+
+.desktop.unlocked {
+  display: block;
+  animation: desktopIn .7s ease both;
+}
+
+.desktop::before,
+.desktop::after {
+  content: "✦";
+  position: absolute;
+  color: rgba(255,255,255,.55);
+  pointer-events: none;
+}
+
+.desktop::before {
+  top: 13%;
+  right: 17%;
+  font-size: 30px;
+}
+
+.desktop::after {
+  bottom: 20%;
+  left: 48%;
+  font-size: 20px;
+}
+
+/* LEFT-SIDE ICONS */
+
+.desktop-icons {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 90px;
+}
+
+.desktop-icon {
+  width: 90px;
+  min-height: 82px;
+  padding: 5px 3px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-shadow: 0 1px rgba(255,255,255,.65);
+}
+
+.desktop-icon:hover {
+  background: rgba(255,255,255,.2);
+}
+
+.desktop-icon:active {
+  background: rgba(178,206,247,.32);
+}
+
+.folder-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 43px;
+  margin: 0 auto 5px;
+  border: 1px solid rgba(69,59,70,.32);
+  border-radius: 4px;
+  background: linear-gradient(145deg, #fff4f5, var(--pink));
+  box-shadow: 2px 3px 0 rgba(69,59,70,.13);
+  font-size: 24px;
+}
+
+/* WINDOWS */
+
+.window {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: min(360px, 70vw);
+  min-height: 205px;
+  display: none;
+  background: rgba(255, 248, 244, .94);
+  border: 1px solid rgba(69,59,70,.48);
+  box-shadow: 8px 9px 0 rgba(69,59,70,.14);
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  animation: windowOpen .22s ease both;
+}
+
+.window.open {
+  display: block;
+}
+
+.window.minimized {
+  display: none;
+}
+
+.window-titlebar {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 11px;
+  border-bottom: 1px solid rgba(69,59,70,.35);
+  background: linear-gradient(90deg, var(--window-pink), #f1d7e3);
+  font-size: 15px;
+}
+
+.window-controls {
+  height: 100%;
+  display: flex;
+}
+
+.window-controls button {
+  width: 34px;
+  height: 100%;
+  border: 0;
+  border-left: 1px solid rgba(69,59,70,.25);
+  background: transparent;
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.window-controls button:hover {
+  background: rgba(255,255,255,.35);
+}
+
+.window-content {
+  min-height: 170px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-symbol {
+  margin-bottom: 14px;
+  font-size: 35px;
+  color: #b8789e;
+}
+
+.window-content p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/* NOTIFICATION */
+
+.notification {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 100;
+  width: min(370px, calc(100vw - 40px));
+  display: flex;
+  gap: 13px;
+  padding: 17px 38px 17px 17px;
+  background: rgba(255,248,244,.96);
+  border: 1px solid rgba(69,59,70,.4);
+  box-shadow: 6px 7px 0 rgba(69,59,70,.12);
+  animation: notificationIn .45s ease both;
+}
+
+.notification strong {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.notification p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.notification-icon {
+  font-size: 24px;
+  color: #b8789e;
+}
+
+.notification-close {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  border: 0;
+  background: transparent;
+  font-size: 18px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* TASKBAR */
+
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border-top: 1px solid rgba(69,59,70,.38);
+  background: rgba(239,221,231,.92);
+  box-shadow: 0 -2px 0 rgba(255,255,255,.45);
+}
+
+.start-button,
+.taskbar-app {
+  height: 34px;
+  border: 1px solid rgba(69,59,70,.35);
+  background: rgba(255,248,244,.68);
+  color: var(--ink);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.start-button {
+  padding: 0 13px;
+  font-size: 15px;
+  box-shadow: 2px 2px 0 rgba(69,59,70,.12);
+}
+
+.taskbar-app {
+  width: 34px;
+  font-size: 17px;
+}
+
+.start-button:hover,
+.taskbar-app:hover {
+  background: rgba(247,178,240,.45);
+}
+
+.taskbar-divider {
+  width: 1px;
+  height: 29px;
+  margin: 0 4px;
+  background: rgba(69,59,70,.25);
+}
+
+.taskbar-spacer {
+  flex: 1;
+}
+
+.taskbar-text {
+  margin-right: 8px;
+  font-size: 13px;
+}
+
+/* ANIMATIONS */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes desktopIn {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes notificationIn {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  .password-card {
+    padding: 43px 25px 38px;
+  }
+
+  .desktop-icons {
+    top: 15px;
+    left: 8px;
+    width: 78px;
+    gap: 7px;
+  }
+
+  .desktop-icon {
+    width: 78px;
+    min-height: 72px;
+    font-size: 12px;
+  }
+
+  .folder-icon {
+    width: 45px;
+    height: 37px;
+    font-size: 20px;
+  }
+
+  .window {
+    width: min(330px, calc(100vw - 35px));
+    left: 55% !important;
+  }
+
+  .notification {
+    top: 12px;
+    right: 12px;
+  }
+}

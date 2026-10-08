@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the 20's, Abhilash</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PASSWORD SCREEN -->
+  <section id="password-screen" class="screen active">
+    <div class="password-card">
+      <div class="tiny-star">✦</div>
+      <h1>Welcome to the 20's,<br>Abhilash</h1>
+      <p class="password-subtitle">A new chapter is waiting for you.</p>
+
+      <label for="password-input">Enter Password</label>
+      <input id="password-input" type="password" autocomplete="off" placeholder="••••••••">
+      <button id="unlock-button">UNLOCK</button>
+
+      <p id="password-error" class="error-message"></p>
+    </div>
+  </section>
+
+  <!-- DESKTOP -->
+  <section id="desktop" class="desktop">
+
+    <div id="notification" class="notification">
+      <button class="notification-close" aria-label="Close">×</button>
+      <div class="notification-icon">✦</div>
+      <div>
+        <strong>Achievement unlocked</strong>
+        <p>You have successfully survived another year.</p>
+      </div>
+    </div>
+
+    <div class="desktop-icons">
+
+      <button class="desktop-icon" data-window="window-1">
+        <span class="folder-icon">♡</span>
+        <span>Folder 1</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-2">
+        <span class="folder-icon">✦</span>
+        <span>Folder 2</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-3">
+        <span class="folder-icon">♡</span>
+        <span>Folder 3</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-4">
+        <span class="folder-icon">☆</span>
+        <span>Folder 4</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-5">
+        <span class="folder-icon">♧</span>
+        <span>Folder 5</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-6">
+        <span class="folder-icon">♡</span>
+        <span>Folder 6</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-7">
+        <span class="folder-icon">✧</span>
+        <span>Folder 7</span>
+      </button>
+
+      <button class="desktop-icon" data-window="window-8">
+        <span class="folder-icon">☆</span>
+        <span>Folder 8</span>
+      </button>
+
+    </div>
+
+    <!-- EMPTY WINDOWS -->
+    <div class="window" id="window-1" style="--x: 31%; --y: 16%;">
+      <div class="window-titlebar">
+        <span>Folder 1</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">♡</div>
+        <p>This folder is waiting for something wonderful.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-2" style="--x: 51%; --y: 19%;">
+      <div class="window-titlebar">
+        <span>Folder 2</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">✦</div>
+        <p>Under construction.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-3" style="--x: 37%; --y: 49%;">
+      <div class="window-titlebar">
+        <span>Folder 3</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">♡</div>
+        <p>Something will live here soon.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-4" style="--x: 61%; --y: 45%;">
+      <div class="window-titlebar">
+        <span>Folder 4</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">☆</div>
+        <p>Empty for now.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-5" style="--x: 28%; --y: 68%;">
+      <div class="window-titlebar">
+        <span>Folder 5</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">♧</div>
+        <p>More birthday magic coming soon.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-6" style="--x: 54%; --y: 68%;">
+      <div class="window-titlebar">
+        <span>Folder 6</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">♡</div>
+        <p>Nothing here yet.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-7" style="--x: 43%; --y: 31%;">
+      <div class="window-titlebar">
+        <span>Folder 7</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">✧</div>
+        <p>Coming soon.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-8" style="--x: 68%; --y: 27%;">
+      <div class="window-titlebar">
+        <span>Folder 8</span>
+        <div class="window-controls">
+          <button class="minimize">—</button>
+          <button class="close">×</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <div class="empty-symbol">☆</div>
+        <p>Reserved for something special.</p>
+      </div>
+    </div>
+
+    <!-- VISUAL TASKBAR -->
+    <div class="taskbar">
+      <button class="start-button"><span>♡</span> Start</button>
+      <div class="taskbar-divider"></div>
+      <button class="taskbar-app">▣</button>
+      <button class="taskbar-app">✉</button>
+      <button class="taskbar-app">♫</button>
+      <button class="taskbar-app">♡</button>
+      <div class="taskbar-spacer"></div>
+      <span class="taskbar-text">birthday.exe</span>
+    </div>
+
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
