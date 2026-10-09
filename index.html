@@ -110,6 +110,7 @@
       </div>
       <div class="museum-home window-content">
         <p class="museum-intro">A little archive of the person you became.</p>
+        <button class="restore-letter" id="restore-exhibit" type="button" hidden>▣ Restore exhibit</button>
         <div class="exhibit-grid">
           <button class="exhibit-folder" data-exhibit="1">
             <span class="mini-folder">♡</span>
@@ -141,7 +142,8 @@
         <div class="window-titlebar">
           <span id="exhibit-title">Exhibit</span>
           <div class="window-controls">
-            <button id="exhibit-close" aria-label="Close exhibit">×</button>
+            <button id="exhibit-minimize" type="button" aria-label="Minimize exhibit">—</button>
+            <button id="exhibit-close" type="button" aria-label="Close exhibit">×</button>
           </div>
         </div>
         <div class="exhibit-content">
@@ -400,17 +402,42 @@
       </div>
     </div>
 
-    <div class="window" id="window-5" style="--x: 28%; --y: 68%;">
+    <div class="window open-when-window" id="window-5" style="--x: 28%; --y: 68%;">
       <div class="window-titlebar">
         <span>Open When...</span>
         <div class="window-controls">
-          <button class="minimize">—</button>
-          <button class="close">×</button>
+          <button class="minimize" aria-label="Minimize Open When window">—</button>
+          <button class="close" aria-label="Close Open When window">×</button>
         </div>
       </div>
-      <div class="window-content">
-        <div class="empty-symbol">♧</div>
-        <p>More birthday magic coming soon.</p>
+      <div class="window-content open-when-content">
+        <p class="open-when-intro">Little letters for different kinds of days.</p>
+        <div class="open-when-list">
+          <button class="open-when-card" type="button" data-letter="happy"><span class="letter-stamp">♡</span><span>Open when you're happy</span><small>A little reminder to keep smiling</small></button>
+          <button class="open-when-card" type="button" data-letter="overthinking"><span class="letter-stamp">✧</span><span>Open when you're overthinking</span><small>One thought at a time, love</small></button>
+          <button class="open-when-card" type="button" data-letter="sleep"><span class="letter-stamp">☾</span><span>Open when you can't sleep</span><small>A tiny goodnight from me</small></button>
+          <button class="open-when-card" type="button" data-letter="anytime"><span class="letter-stamp">✉</span><span>Open anytime</span><small>For no reason at all</small></button>
+        </div>
+        <button class="restore-letter" id="restore-letter" type="button" hidden>✉ Restore your letter</button>
+      </div>
+
+      <div class="letter-popup" id="letter-popup" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="letter-popup-title">
+        <div class="window-titlebar letter-titlebar">
+          <span id="letter-popup-title">A letter for you</span>
+          <div class="window-controls">
+            <button id="letter-minimize" type="button" aria-label="Minimize letter">—</button>
+            <button id="letter-close" type="button" aria-label="Close letter">×</button>
+          </div>
+        </div>
+        <div class="letter-paper-wrap">
+          <article class="letter-paper">
+            <div class="letter-topmark">FOR ABLAS, WITH LOVE ♡</div>
+            <h3 id="letter-heading">A little letter</h3>
+            <div class="letter-rule"><span>✦</span></div>
+            <p class="letter-message" id="letter-message"></p>
+            <div class="letter-signoff">always yours, <span>♡</span></div>
+          </article>
+        </div>
       </div>
     </div>
 
@@ -422,9 +449,34 @@
           <button class="close">×</button>
         </div>
       </div>
-      <div class="window-content">
-        <div class="empty-symbol">♡</div>
-        <p>Nothing here yet.</p>
+      <div class="window-content horoscope-content">
+        <div class="horoscope-loading" id="horoscope-loading">
+          <div class="horoscope-orbit"><span>♎</span></div>
+          <p>Predicting your Libra horoscope...</p>
+          <div class="horoscope-progress"><span></span></div>
+        </div>
+        <div class="horoscope-timeline" id="horoscope-timeline" hidden>
+          <p class="horoscope-kicker">YOUR LIBRA FORECAST ✦</p>
+          <div class="timeline-line">
+            <article class="timeline-stop timeline-now">
+              <span class="timeline-dot">♡</span>
+              <div><small>IN A MINUTE</small><h3>Abhi, right now</h3><p>Smiling while reading this message.</p></div>
+            </article>
+            <article class="timeline-stop">
+              <span class="timeline-dot">✧</span>
+              <div><small>IN A MONTH</small><h3>Doing just fine</h3><p>One new little win, several snacks, and the usual questionable sleep schedule.</p></div>
+            </article>
+            <article class="timeline-stop timeline-special">
+              <span class="timeline-dot">♡</span>
+              <div><small>IN 3 MONTHS</small><h3>Delhi date mode</h3><p>Hanging around Connaught Place with your girlfriend, eating Cinnabons. Excellent planetary alignment.</p></div>
+            </article>
+            <article class="timeline-stop timeline-future">
+              <span class="timeline-dot">☼</span>
+              <div><small>IN 10 YEARS</small><h3>A life that feels good</h3><p>Content, happy, living really well, and still wearing that smile.</p></div>
+            </article>
+          </div>
+          <p class="horoscope-footnote">The stars are optimistic about you, Abhilash. ♡</p>
+        </div>
       </div>
     </div>
 
@@ -436,18 +488,113 @@
           <button class="close">×</button>
         </div>
       </div>
-      <div class="window-content">
-        <div class="empty-symbol">✧</div>
-        <p>Coming soon.</p>
+      <div class="window-content sweettooth-content">
+        <div class="cake-sparkles" aria-hidden="true"><span>✦</span><span>♡</span><span>✧</span><span>✦</span></div>
+        <p class="cake-eyebrow">A LITTLE BIRTHDAY MOMENT</p>
+        <div class="birthday-cake" id="birthday-cake" role="img" aria-label="A pink birthday cake with five lit candles">
+          <div class="cake-candles" id="cake-candles" aria-hidden="true">
+            <span class="cake-candle"><i></i></span><span class="cake-candle"><i></i></span><span class="cake-candle"><i></i></span><span class="cake-candle"><i></i></span><span class="cake-candle"><i></i></span>
+          </div>
+          <div class="cake-top"></div>
+          <div class="cake-body"><span class="cake-icing-drip"></span><span class="cake-decoration">♡　✦　♡　✦　♡</span></div>
+          <div class="cake-plate"></div>
+        </div>
+        <h2 class="cake-prompt" id="cake-prompt">Are you ready?</h2>
+        <p class="cake-subprompt" id="cake-subprompt">Make a little birthday wish, Abhilash.</p>
+        <button class="cake-action" id="cake-action" type="button">I'm ready! <span>♡</span></button>
+        <div class="cake-confetti" id="cake-confetti" aria-hidden="true"></div>
+        <p class="cake-finale" id="cake-finale" hidden>HAPPY 20TH BIRTHDAY, ABLAS! ♡</p>
       </div>
+    </div>
+
+    <!-- ABHIGPT — a tiny, lovingly unreliable birthday chatbot -->
+    <div class="abhigpt-overlay" id="abhigpt-overlay" aria-hidden="true">
+      <section class="abhigpt-window" role="dialog" aria-modal="false" aria-labelledby="abhigpt-title">
+        <div class="abhigpt-titlebar">
+          <span id="abhigpt-title"><span class="abhigpt-mark">◈</span> AbhiGPT</span>
+          <div class="window-controls">
+            <button id="abhigpt-minimize" type="button" aria-label="Minimize AbhiGPT">—</button>
+            <button id="abhigpt-close" type="button" aria-label="Close AbhiGPT">×</button>
+          </div>
+        </div>
+        <div class="abhigpt-landing" id="abhigpt-landing">
+          <div class="abhigpt-logo">◈</div>
+          <h2>Ask any questions from AbhiGPT</h2>
+          <p>A very specialised AI, trained on exactly one birthday boy.</p>
+          <button class="abhigpt-ask-now" id="abhigpt-ask-now" type="button">Ask now <span>→</span></button>
+        </div>
+        <div class="abhigpt-chat" id="abhigpt-chat" hidden>
+          <div class="abhigpt-chat-heading"><span class="abhigpt-logo-small">◈</span><div><strong>AbhiGPT</strong><small>Here for your very important questions.</small></div></div>
+          <div class="abhigpt-messages" id="abhigpt-messages" aria-live="polite">
+            <div class="abhigpt-assistant-message">Hello, Abhilash. Ask me something. I have been trained by your girlfriend, so please manage your expectations accordingly.</div>
+          </div>
+          <form class="abhigpt-composer" id="abhigpt-form">
+            <div class="abhigpt-input-wrap">
+              <input id="abhigpt-input" type="text" autocomplete="off" placeholder="Ask a question…" aria-label="Choose a question to ask AbhiGPT" />
+              <div class="abhigpt-suggestions" id="abhigpt-suggestions" hidden></div>
+            </div>
+            <button type="submit" aria-label="Send question">↑</button>
+          </form>
+          <p class="abhigpt-footnote">This version knows a very specific set of things.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- EMAIL — a birthday inbox with one unread message -->
+    <div class="email-overlay" id="email-overlay" aria-hidden="true">
+      <section class="email-window" role="dialog" aria-modal="false" aria-labelledby="email-app-title">
+        <div class="email-titlebar">
+          <span id="email-app-title"><span class="gmail-mark">M</span> Mail</span>
+          <div class="window-controls">
+            <button id="email-minimize" type="button" aria-label="Minimize Email">—</button>
+            <button id="email-close" type="button" aria-label="Close Email">×</button>
+          </div>
+        </div>
+        <div class="gmail-topbar">
+          <div class="gmail-brand"><span class="gmail-mark">M</span><span>Gmail</span></div>
+          <div class="gmail-search"><span>⌕</span><span>Search mail</span></div>
+          <div class="gmail-profile" title="Abhilash">A</div>
+        </div>
+        <div class="gmail-layout">
+          <aside class="gmail-sidebar">
+            <div class="gmail-compose"><span>＋</span> Compose</div>
+            <div class="gmail-nav-item active"><span>▣</span> Inbox <b>1</b></div>
+            <div class="gmail-nav-item"><span>☆</span> Starred</div>
+            <div class="gmail-nav-item"><span>◷</span> Snoozed</div>
+            <div class="gmail-nav-item"><span>➤</span> Sent</div>
+            <div class="gmail-nav-item"><span>▱</span> Drafts</div>
+          </aside>
+          <main class="gmail-main">
+            <div class="gmail-toolbar">
+              <button id="email-back" type="button" aria-label="Back to inbox" hidden>←</button>
+              <span>□</span><span>↻</span><span>⋮</span>
+              <span class="gmail-count" id="gmail-count">1–1 of 1</span>
+            </div>
+            <div id="gmail-inbox-view" class="gmail-inbox-view">
+              <div class="gmail-category-row"><span class="selected">▣ Primary</span><span>♧ Promotions</span><span>♧ Social</span></div>
+              <button class="gmail-email-row unread" id="birthday-email-row" type="button">
+                <span class="gmail-checkbox">□</span><span class="gmail-star">☆</span>
+                <span class="gmail-sender">Abhya</span>
+                <span class="gmail-row-copy"><strong>To the birthday boy, happy buttday cutie!</strong><small>Dear Abhilash, Happy birthday to you. Happy happy 20th to you. Oh i have soo much to say…</small></span>
+                <span class="gmail-date">11:11 PM</span>
+              </button>
+            </div>
+            <article id="gmail-message-view" class="gmail-message-view" hidden>
+              <h1>To the birthday boy, happy buttday cutie!</h1>
+              <div class="gmail-sender-detail"><div class="gmail-sender-avatar">A</div><div class="gmail-sender-lines"><strong>Abhya <span>&lt;abbylovesabhi@happybday.com&gt;</span></strong><small>to me · just now</small></div><span class="gmail-message-more">☆　↩　⋮</span></div>
+              <div class="gmail-message-body" id="gmail-message-body"></div>
+            </article>
+          </main>
+        </div>
+      </section>
     </div>
 
     <!-- VISUAL TASKBAR -->
     <div class="taskbar">
       <button class="start-button"><span class="start-logo">▦</span> Start</button>
       <div class="taskbar-divider"></div>
-      <button class="taskbar-app" aria-label="Email">✉</button>
-      <button class="taskbar-app" aria-label="AbhiGPT">◈</button>
+      <button class="taskbar-app" id="email-taskbar" aria-label="Open Email">✉</button>
+      <button class="taskbar-app" id="abhigpt-taskbar" aria-label="Open AbhiGPT">◈</button>
       <div class="taskbar-spacer"></div>
       <div class="taskbar-clock">
         <span>10/10/2026</span>

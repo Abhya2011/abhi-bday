@@ -1486,3 +1486,467 @@ body {
   .song-info strong { font-size: 14px; }
   .music-heading p { font-size: 13px; }
 }
+
+/* ---------------- OPEN WHEN LETTERS ---------------- */
+.open-when-window {
+  width: min(430px, calc(100vw - 28px));
+  max-height: min(76vh, 690px);
+}
+.open-when-content {
+  display: block;
+  min-height: 0;
+  max-height: min(76vh, 650px);
+  overflow-y: auto;
+  padding: 18px;
+  background: linear-gradient(145deg, rgba(255,248,244,.98), rgba(235,229,249,.97));
+  text-align: left;
+}
+.open-when-intro {
+  margin: 0 0 14px !important;
+  color: #78657c;
+  font-style: italic;
+  text-align: center;
+  font-size: 15px !important;
+}
+.open-when-list { display: grid; gap: 9px; }
+.open-when-card {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr);
+  align-items: center;
+  gap: 2px 10px;
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(83,109,158,.28);
+  background: rgba(255,255,255,.78);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.open-when-card:hover, .open-when-card:focus-visible {
+  transform: translateY(-2px);
+  background: #fff;
+  box-shadow: 3px 4px 0 rgba(83,109,158,.13);
+  outline: 1px solid #a28bab;
+}
+.letter-stamp {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f7e0f1;
+  color: #82658d;
+  font-size: 18px;
+}
+.open-when-card:nth-child(even) .letter-stamp { background: #e1eafa; }
+.open-when-card > span:nth-child(2) { font-size: 16px; }
+.open-when-card small { color: #837486; font: 11px/1.4 Arial, sans-serif; }
+.restore-letter {
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 10px;
+  border: 1px dashed #b49ab9;
+  background: #f9edf7;
+  color: #5a4a60;
+  font: 13px Arial, sans-serif;
+  cursor: pointer;
+}
+.restore-letter[hidden] { display: none; }
+.letter-popup {
+  position: absolute;
+  z-index: 40;
+  left: 50%;
+  top: 50%;
+  width: min(510px, calc(100vw - 38px));
+  max-height: min(76vh, 700px);
+  display: none;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(69,59,70,.58);
+  background: #fff8f4;
+  box-shadow: 9px 10px 0 rgba(69,59,70,.22);
+  animation: letterPopupOpen .2s ease both;
+}
+@keyframes letterPopupOpen {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.96); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.letter-popup.open { display: block; }
+.letter-popup.minimized { display: none; }
+.letter-titlebar { background: linear-gradient(90deg, #b9ccef, #efd2e9); }
+.letter-paper-wrap {
+  padding: 13px;
+  max-height: calc(min(76vh, 700px) - 35px);
+  overflow-y: auto;
+  background: repeating-linear-gradient(135deg, #f4e8f0 0 9px, #f7edf5 9px 18px);
+}
+.letter-paper {
+  position: relative;
+  padding: 25px 27px 22px;
+  border: 1px solid #e1cbdc;
+  background-color: #fffdf8;
+  background-image: linear-gradient(rgba(170,153,180,.12) 1px, transparent 1px);
+  background-size: 100% 28px;
+  box-shadow: 2px 3px 0 rgba(83,109,158,.1);
+}
+.letter-topmark {
+  margin-bottom: 15px;
+  color: #8b7294;
+  font: 9px/1.4 Arial, sans-serif;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.letter-paper h3 {
+  margin: 0;
+  color: #55465f;
+  font-size: clamp(23px, 4vw, 29px);
+  font-weight: normal;
+  line-height: 1.15;
+  text-align: center;
+}
+.letter-rule { display: flex; align-items: center; gap: 9px; margin: 12px 0 17px; color: #b18db0; }
+.letter-rule::before, .letter-rule::after { content: ""; height: 1px; flex: 1; background: #e5ccdf; }
+.letter-message {
+  margin: 0;
+  color: #4c414e;
+  font-size: 16px;
+  line-height: 1.75;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.letter-signoff { margin-top: 19px; color: #75617e; font-size: 15px; font-style: italic; text-align: right; }
+.letter-signoff span { color: #bd81ae; font-size: 19px; }
+@media (max-width: 650px) {
+  .open-when-window { width: calc(100vw - 24px); max-height: calc(100vh - 78px); left: 50% !important; top: 47% !important; }
+  .open-when-content { max-height: calc(100vh - 125px); padding: 13px; }
+  .open-when-card { padding: 10px; }
+  .letter-popup { width: calc(100vw - 30px); max-height: calc(100vh - 88px); }
+  .letter-paper-wrap { max-height: calc(100vh - 125px); padding: 8px; }
+  .letter-paper { padding: 20px 17px 18px; }
+  .letter-message { font-size: 15px; line-height: 1.65; }
+}
+
+
+/* Keep every desktop folder window centred when opened. */
+.window.open {
+  left: 50% !important;
+  top: 50% !important;
+}
+/* The letter floats above the desktop, centred to the viewport rather than its folder. */
+.letter-popup {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 600;
+}
+/* Museum exhibit window controls and restore affordance. */
+#exhibit-minimize { width: 34px; }
+#restore-exhibit { margin: 0 0 14px; }
+
+/* ABHIGPT */
+.abhigpt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(7, 9, 16, .48);
+  backdrop-filter: blur(3px);
+}
+.abhigpt-overlay.open { display: flex; }
+.abhigpt-window {
+  position: relative;
+  margin: auto;
+  width: min(760px, calc(100vw - 28px));
+  height: min(690px, calc(100vh - 36px));
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #ececf1;
+  background: #212121;
+  border: 1px solid #484848;
+  border-radius: 13px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.42);
+  font-family: Arial, Helvetica, sans-serif;
+  animation: abhigptWindowOpen .2s ease both;
+}
+@keyframes abhigptWindowOpen {
+  from { opacity: 0; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.abhigpt-titlebar {
+  height: 42px;
+  flex: 0 0 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 15px;
+  color: #f7f7f8;
+  background: #292929;
+  border-bottom: 1px solid #393939;
+  font-size: 13px;
+  font-weight: 600;
+}
+.abhigpt-mark { color: #b9ccef; margin-right: 8px; font-size: 18px; }
+.abhigpt-titlebar .window-controls button { color: #e9e9ed; border-left-color: #414141; }
+.abhigpt-titlebar .window-controls button:hover { background: #454545; }
+.abhigpt-landing[hidden] { display: none; }
+.abhigpt-landing {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 22px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 30%, #303039, #212121 62%);
+}
+.abhigpt-logo { color: #d8d9e8; font-size: 46px; line-height: 1; margin-bottom: 24px; text-shadow: 0 0 22px rgba(185,204,239,.2); }
+.abhigpt-landing h2 { margin: 0; color: #f5f5f5; font-size: clamp(22px, 3vw, 30px); font-weight: 500; letter-spacing: -.5px; }
+.abhigpt-landing p { margin: 12px 0 27px; color: #a7a7b0; font-size: 14px; }
+.abhigpt-ask-now { padding: 12px 21px; border: 1px solid #555561; border-radius: 24px; background: #f3f3f5; color: #24242a; font-size: 14px; cursor: pointer; }
+.abhigpt-ask-now:hover { background: #dce6f8; }
+.abhigpt-ask-now span { margin-left: 18px; }
+.abhigpt-chat { flex: 1; min-height: 0; display: flex; flex-direction: column; background: #212121; }
+.abhigpt-chat[hidden] { display: none; }
+.abhigpt-chat-heading { display: flex; align-items: center; gap: 11px; padding: 17px 22px 13px; border-bottom: 1px solid #383838; }
+.abhigpt-logo-small { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #535363; border-radius: 50%; color: #cbd9f5; font-size: 19px; }
+.abhigpt-chat-heading strong { display: block; font-size: 14px; font-weight: 600; }
+.abhigpt-chat-heading small { display: block; margin-top: 4px; color: #9c9ca6; font-size: 11px; }
+.abhigpt-messages { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding: 22px max(18px, calc((100% - 560px)/2)); }
+.abhigpt-assistant-message, .abhigpt-user-message { max-width: 100%; padding: 13px 15px; border-radius: 13px; font-size: 14px; line-height: 1.65; white-space: pre-wrap; }
+.abhigpt-assistant-message { align-self: flex-start; background: #2e2e2e; border: 1px solid #414141; color: #e7e7ec; }
+.abhigpt-user-message { align-self: flex-end; max-width: 88%; background: #3c3c46; color: #f4f4f7; }
+.abhigpt-composer { position: relative; display: flex; align-items: center; gap: 9px; width: min(590px, calc(100% - 32px)); margin: 0 auto; padding: 10px 12px; border: 1px solid #505058; border-radius: 22px; background: #2b2b2b; }
+.abhigpt-input-wrap { position: relative; flex: 1; min-width: 0; }
+.abhigpt-composer input { width: 100%; padding: 6px 3px; border: 0; outline: none; background: transparent; color: #f5f5f5; font: 14px Arial, sans-serif; }
+.abhigpt-composer input::placeholder { color: #92929c; }
+.abhigpt-composer > button { flex: 0 0 31px; width: 31px; height: 31px; border: 0; border-radius: 50%; background: #ececf0; color: #24242a; font-size: 21px; cursor: pointer; }
+.abhigpt-suggestions { position: absolute; bottom: calc(100% + 15px); left: -12px; right: -12px; max-height: 230px; overflow-y: auto; padding: 6px; border: 1px solid #4a4a53; border-radius: 12px; background: #2b2b2b; box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+.abhigpt-suggestions[hidden] { display: none; }
+.abhigpt-suggestion { display: block; width: 100%; padding: 10px 11px; border: 0; border-radius: 7px; background: transparent; color: #e9e9ee; text-align: left; font: 12px/1.4 Arial, sans-serif; cursor: pointer; }
+.abhigpt-suggestion:hover, .abhigpt-suggestion:focus { outline: none; background: #414149; }
+.abhigpt-footnote { margin: 10px 0 15px; color: #81818b; font-size: 10px; text-align: center; }
+@media (max-width: 600px) {
+  .abhigpt-window { width: calc(100vw - 20px); height: calc(100vh - 26px); min-height: 390px; }
+  .abhigpt-messages { padding: 18px 14px; }
+  .abhigpt-landing p { max-width: 270px; line-height: 1.5; }
+}
+
+/* HOROSCOPE — compact, visual Libra timeline */
+#window-6 { width: min(480px, calc(100vw - 28px)); max-height: calc(100vh - 70px); }
+#window-6 .window-content.horoscope-content { display: block; padding: 20px 22px; max-height: calc(100vh - 115px); overflow-y: auto; }
+.horoscope-loading { min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: #67536f; }
+.horoscope-loading[hidden], .horoscope-timeline[hidden] { display: none !important; }
+.horoscope-loading p { margin: 0; font-size: 15px; }
+.horoscope-orbit { width: 76px; height: 76px; display: grid; place-items: center; border: 1px solid #d7b7d1; border-radius: 50%; background: radial-gradient(circle, #fffafc, #f0dcec); box-shadow: 0 0 0 8px rgba(215,183,209,.16), 0 0 25px rgba(183,133,174,.2); animation: horoscopePulse 1.3s ease-in-out infinite; }
+.horoscope-orbit span { font-size: 42px; color: #916a98; }
+@keyframes horoscopePulse { 50% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(215,183,209,.1), 0 0 34px rgba(183,133,174,.3); } }
+.horoscope-progress { width: 170px; height: 4px; overflow: hidden; border-radius: 5px; background: #eadbe8; }
+.horoscope-progress span { display: block; width: 35%; height: 100%; border-radius: inherit; background: #b986b3; animation: horoscopeLoad 3s linear forwards; }
+@keyframes horoscopeLoad { from { width: 0; } to { width: 100%; } }
+.horoscope-kicker { margin: 0 0 17px; text-align: center; color: #9b729b; font: 10px/1.4 Arial, sans-serif; letter-spacing: 2px; }
+.timeline-line { position: relative; display: flex; flex-direction: column; gap: 13px; }
+.timeline-line::before { content: ""; position: absolute; left: 15px; top: 15px; bottom: 15px; width: 1px; background: linear-gradient(#d7a8d0, #b8c9ec); }
+.timeline-stop { position: relative; display: grid; grid-template-columns: 31px 1fr; gap: 12px; align-items: start; }
+.timeline-dot { position: relative; z-index: 1; width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid #d8b6d3; border-radius: 50%; background: #fff8fd; color: #a775a5; font-size: 16px; }
+.timeline-stop > div { padding: 10px 13px 11px; border: 1px solid #ead9e7; border-radius: 9px; background: rgba(255,252,255,.85); }
+.timeline-stop small { color: #9b729b; font: 9px/1.4 Arial, sans-serif; letter-spacing: 1.4px; }
+.timeline-stop h3 { margin: 3px 0 4px; color: #55465f; font-size: 16px; font-weight: normal; }
+.timeline-stop p { margin: 0; color: #675a6b; font-size: 12px; line-height: 1.5; }
+.timeline-special > div { border-color: #d4c3e8; background: linear-gradient(110deg, #fff8fc, #f0efff); }
+.timeline-special .timeline-dot { background: #f1eaff; color: #8a6fa9; }
+.timeline-future > div { background: linear-gradient(110deg, #fffdf8, #f5f1ff); }
+.horoscope-footnote { margin: 15px 0 0; text-align: center; color: #a17ca1; font-size: 11px; font-style: italic; }
+@media (max-width: 600px) {
+  #window-6 .window-content.horoscope-content { padding: 15px 13px; }
+  .horoscope-loading { min-height: 250px; }
+  .timeline-stop > div { padding: 9px 10px; }
+}
+
+/* SWEET TOOTH: keep the birthday folder beside the museum icon. */
+.desktop-icons { position: absolute; }
+.desktop-icon[data-window="window-7"] {
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+#window-7 {
+  width: min(390px, calc(100vw - 30px));
+  max-height: calc(100vh - 90px);
+  overflow: auto;
+}
+#window-7 .sweettooth-content {
+  position: relative;
+  display: flex;
+  min-height: 380px;
+  padding: 22px 22px 20px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 28%, #fffafc 0%, #fff3f8 55%, #f7e7f3 100%);
+}
+.cake-eyebrow {
+  margin: 0 0 5px !important;
+  color: #a36c99;
+  font-size: 10px !important;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.cake-sparkles { position: absolute; inset: 28px 28px auto; height: 150px; pointer-events: none; color: #c28ab7; }
+.cake-sparkles span { position: absolute; animation: cakeTwinkle 2s ease-in-out infinite alternate; }
+.cake-sparkles span:nth-child(1) { left: 6px; top: 40px; font-size: 20px; }
+.cake-sparkles span:nth-child(2) { right: 5px; top: 22px; font-size: 20px; animation-delay: .5s; }
+.cake-sparkles span:nth-child(3) { right: 13px; top: 105px; font-size: 17px; animation-delay: .8s; }
+.cake-sparkles span:nth-child(4) { left: 20px; top: 118px; font-size: 14px; animation-delay: .3s; }
+.birthday-cake { position: relative; width: 218px; height: 174px; margin: 2px auto 8px; flex: 0 0 auto; }
+.cake-plate { position: absolute; left: 9px; right: 9px; bottom: 8px; height: 17px; border-radius: 50%; background: linear-gradient(#fff, #e4c9e1); border: 1px solid #d7b6d5; box-shadow: 0 4px 0 #e4cce1; }
+.cake-body { position: absolute; left: 26px; right: 26px; bottom: 25px; height: 77px; border: 1px solid #d58bb5; border-radius: 9px 9px 13px 13px; background: repeating-linear-gradient(0deg, #f3a7ca 0 18px, #f8c8dd 18px 25px); box-shadow: inset 0 -7px 0 rgba(196, 98, 151, .12), 0 4px 0 #df9cc4; }
+.cake-top { position: absolute; left: 26px; right: 26px; bottom: 91px; height: 27px; border: 1px solid #e0a5ca; border-radius: 50%; background: #fff0f8; z-index: 2; box-shadow: inset 0 -4px 0 #f8d5e9; }
+.cake-icing-drip { position: absolute; left: 9px; right: 9px; top: -1px; height: 17px; border-radius: 0 0 10px 10px; background: #fff0f8; clip-path: polygon(0 0,100% 0,100% 45%,88% 45%,83% 100%,75% 100%,70% 45%,55% 45%,50% 85%,43% 85%,38% 45%,20% 45%,16% 95%,9% 95%,7% 45%,0 45%); }
+.cake-decoration { position: absolute; z-index: 3; left: 0; right: 0; top: 34px; color: #fff8fd; font-size: 13px; letter-spacing: 1px; text-align: center; text-shadow: 0 1px 1px #d58bb5; }
+.cake-candles { position: absolute; z-index: 4; left: 47px; right: 47px; bottom: 112px; display: flex; align-items: flex-end; justify-content: space-between; }
+.cake-candle { position: relative; display: block; width: 9px; height: 35px; border-radius: 3px 3px 1px 1px; background: repeating-linear-gradient(135deg, #b2cef7 0 4px, #fff 4px 7px); border: 1px solid #9ab6e8; box-shadow: 0 1px 0 rgba(93, 75, 105, .12); }
+.cake-candle:nth-child(even) { background: repeating-linear-gradient(135deg, #f7b2f0 0 4px, #fff 4px 7px); border-color: #e19bd8; height: 31px; }
+.cake-candle i { position: absolute; left: 0; right: 0; top: -15px; margin: auto; width: 11px; height: 15px; border-radius: 80% 20% 70% 30%; background: radial-gradient(circle at 65% 70%, #fff7b8 0 15%, #ffd66f 32%, #ff9c70 75%); transform: rotate(5deg); filter: drop-shadow(0 0 4px rgba(255, 181, 98, .65)); animation: candleFlicker .7s ease-in-out infinite alternate; }
+.cake-candle i::after { content: ""; position: absolute; left: 4px; bottom: -3px; width: 2px; height: 6px; background: #6e5364; border-radius: 2px; }
+.candles-blown .cake-candle i { opacity: 0; transform: translateY(-8px) scale(.35); transition: opacity .2s, transform .25s; }
+.candles-blown .cake-candle::after { content: "〰"; position: absolute; top: -20px; left: -3px; color: #a99aaa; font-size: 17px; animation: smokeWisp 1.5s ease-out both; }
+.cake-prompt { margin: 3px 0 5px; color: #654b68; font-size: 25px; font-weight: normal; line-height: 1.2; }
+.cake-subprompt { max-width: 270px; margin: 0 0 15px !important; color: #7e687d; font-size: 13px !important; }
+.cake-action { border: 1px solid #d19ac6; border-radius: 20px; padding: 10px 20px; background: linear-gradient(135deg, #f7b2f0, #f9d5eb); color: #624b68; font: inherit; font-size: 14px; cursor: pointer; box-shadow: 0 3px 0 #e3b2d9; }
+.cake-action:hover { transform: translateY(-1px); box-shadow: 0 4px 0 #e3b2d9; }
+.cake-action span { margin-left: 5px; }
+.cake-mic-note { margin: 11px 0 0 !important; color: #9b8799; font-size: 10px !important; }
+.cake-fallback { margin-top: 8px; border: 0; background: transparent; color: #98708f; font: inherit; font-size: 11px; text-decoration: underline; cursor: pointer; }
+.cake-finale { margin: 10px 0 0 !important; color: #9b568d; font-size: 13px !important; font-weight: bold; letter-spacing: .5px; animation: cakeFinalePop .5s ease both; }
+.cake-confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.cake-confetti span { position: absolute; top: -20px; left: calc(7% + var(--piece) * 7.5%); color: #c78eb9; font-size: 19px; animation: cakeConfettiFall 2.3s ease-in forwards; animation-delay: calc(var(--piece) * .07s); }
+.cake-confetti span:nth-child(3n) { color: #8caee4; }
+.cake-confetti span:nth-child(2n) { color: #e6b66f; }
+@keyframes candleFlicker { from { transform: rotate(-5deg) scale(.95); } to { transform: rotate(7deg) scale(1.08); } }
+@keyframes cakeTwinkle { from { opacity: .45; transform: scale(.85) rotate(-8deg); } to { opacity: 1; transform: scale(1.12) rotate(8deg); } }
+@keyframes smokeWisp { from { opacity: .75; transform: translateY(0) scale(.8); } to { opacity: 0; transform: translateY(-18px) scale(1.2); } }
+@keyframes cakeConfettiFall { 0% { transform: translateY(-5px) rotate(0deg); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(420px) rotate(300deg); opacity: 0; } }
+@keyframes cakeFinalePop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+@media (max-width: 600px) {
+  .desktop-icon[data-window="window-7"] { left: 98px; }
+  #window-7 .sweettooth-content { min-height: 360px; padding: 17px 14px; }
+  .birthday-cake { transform: scale(.92); margin-top: -3px; margin-bottom: 0; }
+}
+
+/* EMAIL — a centred, Gmail-inspired birthday inbox. */
+.email-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: rgba(26, 31, 43, .38);
+  backdrop-filter: blur(3px);
+}
+.email-overlay.open { display: flex; }
+.email-window {
+  position: relative;
+  width: min(1120px, calc(100vw - 28px));
+  height: min(760px, calc(100vh - 28px));
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #c8cbd1;
+  border-radius: 12px;
+  background: #f6f8fc;
+  box-shadow: 0 24px 80px rgba(25, 32, 48, .32);
+  color: #202124;
+  font-family: Arial, Helvetica, sans-serif;
+  animation: emailWindowOpen .18s ease both;
+}
+@keyframes emailWindowOpen { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: scale(1); } }
+.email-titlebar {
+  height: 38px;
+  flex: 0 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 14px;
+  background: #e8edf7;
+  border-bottom: 1px solid #d5dbe6;
+  color: #414754;
+  font-size: 12px;
+}
+.email-titlebar > span { display: flex; align-items: center; gap: 7px; }
+.email-titlebar .window-controls button { color: #3f4652; border-left-color: #d0d6e0; }
+.email-titlebar .window-controls button:hover { background: #d6dce7; }
+.gmail-mark { display: inline-grid; place-items: center; width: 25px; height: 21px; color: #d94b42; font-weight: 800; font-size: 19px; }
+.gmail-topbar { height: 66px; flex: 0 0 66px; display: flex; align-items: center; gap: 28px; padding: 0 24px; background: #f6f8fc; }
+.gmail-brand { display: flex; align-items: center; gap: 8px; width: 205px; flex: 0 0 205px; color: #5f6368; font-size: 22px; letter-spacing: -.5px; }
+.gmail-brand .gmail-mark { width: 31px; height: 28px; font-size: 25px; }
+.gmail-search { height: 43px; width: min(620px, 65%); display: flex; align-items: center; gap: 13px; padding: 0 18px; border-radius: 24px; background: #eaf1fb; color: #5c6471; font-size: 14px; }
+.gmail-search span:first-child { font-size: 24px; }
+.gmail-profile { display: grid; place-items: center; margin-left: auto; width: 34px; height: 34px; border-radius: 50%; background: #6b8fc5; color: white; font-size: 15px; }
+.gmail-layout { flex: 1; min-height: 0; display: flex; gap: 0; padding-top: 4px; }
+.gmail-sidebar { flex: 0 0 218px; padding: 8px 12px 16px 10px; background: #f6f8fc; color: #353a42; font-size: 13px; }
+.gmail-compose { display: flex; align-items: center; gap: 11px; width: 142px; height: 49px; margin: 0 0 17px 3px; padding: 0 17px; border-radius: 15px; background: #c2e7ff; color: #1b3548; font-size: 14px; box-shadow: 0 1px 2px rgba(0,0,0,.06); cursor: pointer; }
+.gmail-compose span { font-size: 23px; font-weight: 300; }
+.gmail-nav-item { display: flex; align-items: center; gap: 16px; height: 34px; padding: 0 15px; border-radius: 0 18px 18px 0; }
+.gmail-nav-item.active { background: #d3e3fd; color: #1d3559; font-weight: 700; }
+.gmail-nav-item b { margin-left: auto; font-size: 12px; }
+.gmail-main { position: relative; flex: 1; min-width: 0; min-height: 0; overflow: auto; border-radius: 17px 17px 0 0; background: #fff; }
+.gmail-toolbar { height: 53px; display: flex; align-items: center; gap: 20px; padding: 0 20px; border-bottom: 1px solid #f0f0f0; color: #5f6368; font-size: 17px; }
+.gmail-toolbar button { padding: 2px 5px; border: 0; background: transparent; color: #5f6368; font-size: 21px; cursor: pointer; }
+.gmail-count { margin-left: auto; font-size: 11px; }
+.gmail-category-row { display: flex; align-items: stretch; height: 49px; border-bottom: 1px solid #e6e8eb; color: #5f6368; font-size: 12px; }
+.gmail-category-row span { display: flex; align-items: center; gap: 9px; width: 190px; padding: 0 18px; }
+.gmail-category-row .selected { border-bottom: 3px solid #0b57d0; color: #0b57d0; font-weight: 700; }
+.gmail-email-row { width: 100%; min-height: 57px; display: flex; align-items: center; gap: 14px; padding: 0 17px; border: 0; border-bottom: 1px solid #edf0f4; background: #f2f6fc; color: #202124; text-align: left; font-family: Arial, sans-serif; cursor: pointer; }
+.gmail-email-row:hover { box-shadow: inset 0 0 0 1px #dfe4ec; }
+.gmail-email-row.unread { background: #fff; }
+.gmail-checkbox, .gmail-star { color: #747981; font-size: 18px; flex: 0 0 auto; }
+.gmail-sender { flex: 0 0 100px; font-size: 12px; font-weight: 700; }
+.gmail-row-copy { min-width: 0; flex: 1; display: flex; align-items: baseline; gap: 9px; overflow: hidden; white-space: nowrap; }
+.gmail-row-copy strong { overflow: hidden; text-overflow: ellipsis; font-size: 12px; font-weight: 700; }
+.gmail-row-copy small { overflow: hidden; text-overflow: ellipsis; color: #656970; font-size: 12px; }
+.gmail-date { flex: 0 0 auto; font-size: 11px; font-weight: 600; }
+.gmail-message-view { padding: 22px clamp(18px, 4vw, 58px) 40px; }
+.gmail-message-view[hidden], .gmail-inbox-view[hidden] { display: none !important; }
+.gmail-message-view h1 { margin: 2px 0 22px; color: #202124; font-size: 22px; line-height: 1.35; font-weight: 400; }
+.gmail-sender-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
+.gmail-sender-avatar { display: grid; place-items: center; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50%; background: #e9c9e5; color: #654563; font-size: 17px; }
+.gmail-sender-lines { min-width: 0; display: flex; flex-direction: column; gap: 5px; font-size: 12px; }
+.gmail-sender-lines strong { font-size: 13px; font-weight: 700; }
+.gmail-sender-lines strong span { color: #6f7378; font-weight: 400; }
+.gmail-sender-lines small { color: #6f7378; font-size: 11px; }
+.gmail-message-more { margin-left: auto; color: #6f7378; white-space: nowrap; }
+.gmail-message-body { max-width: 790px; padding: 0 0 10px 50px; color: #202124; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.75; white-space: pre-wrap; overflow-wrap: anywhere; }
+.gmail-message-body p { margin: 0 0 17px; }
+.gmail-compose-note { position: absolute; left: 24px; bottom: 22px; max-width: calc(100% - 48px); padding: 13px 17px; border-radius: 8px; background: #30343b; color: white; box-shadow: 0 4px 20px #0002; font-size: 12px; }
+@media (max-width: 720px) {
+  .email-window { width: calc(100vw - 16px); height: calc(100vh - 16px); }
+  .gmail-topbar { gap: 12px; padding: 0 12px; }
+  .gmail-brand { width: auto; flex-basis: auto; font-size: 18px; }
+  .gmail-search { width: auto; flex: 1; }
+  .gmail-sidebar { flex-basis: 54px; padding: 8px 4px; }
+  .gmail-compose { width: 43px; height: 43px; justify-content: center; padding: 0; overflow: hidden; font-size: 0; }
+  .gmail-compose span { font-size: 23px; }
+  .gmail-nav-item { justify-content: center; padding: 0; font-size: 0; }
+  .gmail-nav-item b { display: none; }
+  .gmail-email-row { gap: 7px; padding: 0 8px; }
+  .gmail-sender { flex-basis: 60px; font-size: 11px; }
+  .gmail-star { display: none; }
+  .gmail-row-copy { display: block; }
+  .gmail-row-copy strong, .gmail-row-copy small { display: block; }
+  .gmail-date { font-size: 9px; }
+  .gmail-category-row span { width: auto; flex: 1; padding: 0 8px; font-size: 10px; }
+  .gmail-message-view { padding: 18px 14px 30px; }
+  .gmail-message-view h1 { font-size: 19px; }
+  .gmail-message-body { padding-left: 0; font-size: 13px; }
+  .gmail-sender-lines strong span { display: block; margin-top: 3px; overflow-wrap: anywhere; }
+  .gmail-message-more { display: none; }
+}
